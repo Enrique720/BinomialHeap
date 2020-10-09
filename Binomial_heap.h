@@ -57,9 +57,20 @@ public:
   }
 
   void PrintHeap(){
+    cont = 0; 
+    int subgraphs = 0;
+    cout <<  "graph \"\"" << endl;
+    cout << "{\n label= \" Binomial heap \" " << endl;
     for(auto it:m_heap){
+      cout << "subgraph BN" << subgraphs << " \n{ \n";
+      cout << "label= " << "subgraph" << subgraphs << endl;
       it->showParent();
+      cout << "} \n";
+      subgraphs++;
+      cont++;
     }
+
+    cout << "}\n";
   }
  
   NodoB<T> * find(T key){

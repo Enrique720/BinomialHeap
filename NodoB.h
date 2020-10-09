@@ -12,6 +12,7 @@ using namespace std;
   * class NodoB
   * 
   */
+ int cont;
 
 template<class T>
 class NodoB
@@ -29,18 +30,27 @@ public:
   //virtual ~NodoB ();
 
   void show(){
-    cout << "key: " <<m_key << endl;
+   // cout << "key: " <<m_key << endl;
+    cout << "n" << this->m_pPadre->vz_num << " -- " << "n" << this->vz_num  << " ;" << endl;
+    cout << "n" << this->vz_num << " [label=\"" << this->m_key << "\"] ;" << endl;
     if(!m_Hijos.empty()){
       for(auto it:m_Hijos){
+        cont++;
+        it->vz_num= cont;
         it->show();
       }
     }
   }
 
   void showParent() {
-    cout << "Parent key: " <<m_key << endl;
+    //cout << "Parent key: " <<m_key << endl;
+    this->vz_num = cont;
     if(!m_Hijos.empty()){
+      cout << "n" << this->vz_num <<" ;\n";
+      cout << "n" << this->vz_num << " [label=\"" << this->m_key << "\"] ;" << endl;
       for(auto it:m_Hijos){
+        cont++;
+        it->vz_num=cont;
         it->show();
       }
     }
@@ -55,7 +65,7 @@ public:
   }
 
 int m_Grado;
-
+int vz_num;
 T m_key;
 list< NodoB<T> * > m_Hijos;
 NodoB<T> * m_pPadre;
