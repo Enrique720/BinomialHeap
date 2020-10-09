@@ -7,6 +7,7 @@ using namespace std;
 #include "NodoB.h"
 #include <math.h>
 #include <algorithm>
+#include <fstream>
 
 
 
@@ -143,6 +144,16 @@ public:
         this->m_heap.push_back(it);
       }
     }
+  }
+
+  void ReadFromFile(string filename) {
+    fstream f(filename, ios::in);
+    T element;
+    while (f >> element){
+      auto newNodo  = new NodoB<T>(element);
+      Insert(newNodo);
+    }
+    f.close();
   }
 
 
