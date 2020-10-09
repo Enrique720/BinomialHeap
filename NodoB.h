@@ -45,9 +45,9 @@ public:
   void showParent() {
     //cout << "Parent key: " <<m_key << endl;
     this->vz_num = cont;
+    cout << "n" << this->vz_num <<" ;\n";
+    cout << "n" << this->vz_num << " [label=\"" << this->m_key << "\"] ;" << endl;
     if(!m_Hijos.empty()){
-      cout << "n" << this->vz_num <<" ;\n";
-      cout << "n" << this->vz_num << " [label=\"" << this->m_key << "\"] ;" << endl;
       for(auto it:m_Hijos){
         cont++;
         it->vz_num=cont;

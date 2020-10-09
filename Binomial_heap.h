@@ -2,12 +2,12 @@
 #ifndef BINOMIAL_HEAP_H
 #define BINOMIAL_HEAP_H
 #define MAX_INT 10000000
-using namespace std;
 #include <string>
 #include "NodoB.h"
 #include <math.h>
 #include <algorithm>
 #include <fstream>
+using namespace std;
 
 
 
