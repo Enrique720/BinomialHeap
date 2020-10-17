@@ -8,10 +8,6 @@
 using namespace std;
 
 
-/**
-  * class NodoB
-  * 
-  */
  int cont;
 
 template<class T>
@@ -19,15 +15,9 @@ class NodoB
 {
 public:
 
-  /**
-   * Empty Constructor
-   */
+ 
   NodoB (T m_key): m_Grado(0), m_key(m_key) , m_pPadre(nullptr) {};
 
-  /**
-   * Empty Destructor
-   */
-  //virtual ~NodoB ();
 
   void show(){
    // cout << "key: " <<m_key << endl;
@@ -64,11 +54,14 @@ public:
     return nullptr;
   }
 
-int m_Grado;
-int vz_num;
-T m_key;
-list< NodoB<T> * > m_Hijos;
-NodoB<T> * m_pPadre;
+  int m_Grado;
+  int vz_num;
+  string name; 
+  bool color = false; // 0 = blanco, 1 = negro
+  T m_key;
+  list< NodoB<T> * > m_Hijos;
+  NodoB<T> * m_pPadre;
+
 private:
   
 

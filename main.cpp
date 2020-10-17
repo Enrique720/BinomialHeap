@@ -1,12 +1,19 @@
 #include <iostream>
-#include "Binomial_heap.h"
+#include "Fibonacci_heap.h"
 using namespace std;
 
+template <typename T>
+void kruskal(FibonacciHeap<T> & A)
+{
+  
+}
+
+
+
+
 int main () {
-  Binomial_heap<int> myBH;
-  string filename;
-  cin >> filename;
-  myBH.ReadFromFile(filename);  
-  myBH.Delete_Min();
-  myBH.PrintHeap();
+  FibonacciHeap<int> myFH;
+  myFH.ReadFromFile();
+  myFH.ExtractMin();
+  myFH.PrintHeap();
 }

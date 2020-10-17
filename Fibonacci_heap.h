@@ -1,6 +1,6 @@
 
-#ifndef BINOMIAL_HEAP_H
-#define BINOMIAL_HEAP_H
+#ifndef FIBONACCI_HEAP_H
+#define FIBONACCI_HEAP_H
 #define MAX_INT 10000000
 #include <string>
 #include "NodoB.h"
@@ -12,56 +12,56 @@ using namespace std;
 
 
 template<class T>
-class Binomial_heap
+class FibonacciHeap
 {
 public:
 
-  Binomial_heap (): m_size(0) {};
+  FibonacciHeap (): m_size(0) {};
   
-//  virtual ~Binomial_heap ();
+//  virtual ~FibonacciHeap ();
 
   
   void Insert (NodoB<T> * key)
   {
-    if(key->m_key < min){
-      this->minElem = key;
-      min = minElem->m_key;
-    }
-
-    this->m_heap.push_front(key);
-    this->m_size++;
-    this->Compactar();
+      m_heap.insert(minElem, key);
+      if(key->m_key < min){
+        min = key->m_key;
+        minElem--;
+      }
     
+    this->m_size++;
   }
   
   T Get_Min ()
   {
-    return minElem->m_key;
+    return (*minElem)->m_key;
   }
 
-  void Delete_Min ()
+  void ExtractMin ()
   {
-    for(auto it:minElem->m_Hijos){
+    for(auto it:(*minElem)->m_Hijos){
       it->m_pPadre = nullptr;
       m_heap.push_back(it);
     }
-    m_heap.remove(minElem);
-    delete minElem;
+
+    m_heap.remove(*minElem);
+    delete *minElem;
     Compactar();
     min = MAX_INT;
-    for(auto it: m_heap){
-      if(it->m_key < min){
+    for(auto it = m_heap.begin(); it != m_heap.end() ;it++){
+      if( (*it)->m_key < min){
         this->minElem = it;
-        min = minElem->m_key;
+        min = (*minElem)->m_key;
       }
     }
+
   }
 
   void PrintHeap(){
     cont = 0; 
     int subgraphs = 0;
     cout <<  "graph \"\"" << endl;
-    cout << "{\n label= \" Binomial heap \" " << endl;
+    cout << "{\n label= \" Fibonacci heap \" " << endl;
     for(auto it:m_heap){
       cout << "subgraph BN" << subgraphs << " \n{ \n";
       cout << "label= " << "subgraph" << subgraphs << endl;
@@ -111,13 +111,13 @@ public:
   {
     if(p1->m_key > p2->m_key){
       p1->m_pPadre = p2;
-      p2->m_Hijos.push_back(p1);
+      p2->m_Hijos.push_front(p1);
       p2->m_Grado++;
       return p2;
     }
     else{
       p2->m_pPadre = p1;
-      p1->m_Hijos.push_back(p2);
+      p1->m_Hijos.push_front(p2);
       p1->m_Grado++;
       return p1;
     }
@@ -146,7 +146,9 @@ public:
     }
   }
 
-  void ReadFromFile(string filename) {
+  void ReadFromFile() {
+    string filename;
+    cin >> filename;
     fstream f(filename, ios::in);
     T element;
     while (f >> element){
@@ -158,12 +160,11 @@ public:
 
 
 private:
-
+  
   int m_size;
   list<NodoB<T> *> m_heap;
-  NodoB <T> * minElem;
-  int min = MAX_INT;
-
+  typename list<NodoB<T> *>::iterator minElem = m_heap.end();
+  float min = MAX_INT;
 };
 
-#endif // BINOMIAL_HEAP_H
+#endif // FIBONACCI_HEAP_H
